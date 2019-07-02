@@ -1,0 +1,915 @@
+.sideNav{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(#7e6e55, .3);
+    z-index: 999;
+    transition: .5s;
+    opacity: 0;
+    visibility: hidden;
+
+    &.open{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.navBody{
+    position: fixed;
+    top: 0;
+    #{$start-dir}: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: $color-white;
+    padding: 24px;
+    overflow-y: auto;
+    transform: translateX($transform-dir * -100%);
+    z-index: 9999;
+    transition: .5s;
+
+    &.open{
+        transform: translateX(0);
+    }
+
+    .head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+
+        .close1{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            i{
+                color: $color-white;
+            }
+        }
+    }
+
+    .links{
+
+        ul{
+
+            li{
+                padding: 0 10px;
+                
+                &:not(:last-child){
+                    border-bottom: 1px solid #ebebeb;
+                }
+
+                a{
+                    color: $prim-color;
+                    transition: .5s;
+                    font-size: 14px;
+                    font-family: "crBold";
+                    line-height: 2.857;
+
+                    &:hover{
+                        text-decoration: none;
+                        color: $sec-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .accDrop{
+        border-top: 1px solid #ebebeb;
+        display: none;
+        padding: 10px;
+
+        @include Sm{
+            display: block;
+        }
+
+
+        .dropHead{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+
+            span{
+                color: $prim-color;
+                font-size: 14px;
+                font-family: "crBold";
+
+                &:nth-child(2){
+                    width: 0;
+                    height: 0;
+                    border-top: 5px solid $prim-color;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    transition: .5s;
+
+                    &.trans{
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        .dropBody{
+            display: none;
+            padding-top: 25px;
+
+            a{
+                color: $prim-color;
+                transition: .5s;
+                display: block;
+                margin: 10px 0;
+
+                &:hover{
+                    text-decoration: none;
+                    color: $sec-color;
+                }
+            }
+        }
+    }
+
+    .searchSec{
+        display: none;
+        margin-top: 40px;
+        position: relative;
+
+        @include Sm{
+            display: block;
+        }
+
+        input{
+            height: 34px;
+            border-radius: 100px;
+            border: 2px solid #dedede;
+            width: 100%;
+            padding: 0 22px 0;
+
+            &:focus{
+                outline: none;
+            }
+        }
+
+        button{
+            position: absolute;
+            #{$end-dir}: 0;                
+            top: 50%;                
+            transform: translateY(-50%);                
+            background-color: transparent;                
+            border: 0;
+            margin-#{$end-dir}: 10px;
+
+            i{
+                color: $prim-color;
+            }
+        }
+    }
+}
+
+.upnav{
+    padding: 10px 0;
+
+    .content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .minu{
+            display: flex;
+            align-items: center;
+            flex-basis: 25%;
+            cursor: pointer;
+
+            @include Sm{
+                display: flex;
+                justify-content: center;
+
+                span{
+                    display: none;
+                }
+            }
+    
+            span{
+                margin-#{$start-dir}: 10px;
+                font-size: 14px;
+                font-family: "crBold";
+                color: $prim-color;
+            }
+
+            i{
+                color: $prim-color;
+                font-size: 18px;
+            }
+        }
+
+        .logo{
+            display: flex;
+            justify-content: center;
+            width: 50%;
+        }
+
+        .options{
+            display: flex;
+            align-items: center;
+            flex-basis: 25%;
+            justify-content: flex-end;
+
+            @include Sm{
+                justify-content: center;
+            }
+    
+            .search{
+                position: relative;
+                margin-#{$end-dir}: 30px;
+
+                @include Sm{
+                    display: none;
+                }
+
+
+                input{
+                    width: 240px;
+                    height: 34px;
+                    position: absolute;
+                    #{$end-dir}: -10px;
+                    top: -16px;
+                    border: none;
+                    background-color: #FFF;
+                    pointer-events: none;
+                    transform-origin: $end-dir;
+                    transform: rotate($transform-dir * -90deg);
+                    padding: 0 22px 0;
+                    border-radius: 100px;
+                    border: 2px solid #dedede;
+                    opacity: 0;
+                    transition: .5s;
+
+                    &:focus{
+                        outline: none;
+                    }
+
+                    &.open{
+                        transform: rotate($transform-dir * 0deg);
+                        transform-origin: $end-dir;
+                        border-radius: 100px;
+                        pointer-events: auto;
+                        opacity: 1;
+                    }
+                }
+    
+                button{
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-40%);
+                    #{$end-dir}: 0px;
+                    background: transparent;
+                    border: none;
+                    padding: 0;
+                }
+            }
+
+            i{
+                width: 18px;
+                height: 18px;
+                font-size: 18px;
+                color: $prim-color;
+                transition: .5s;
+            }
+
+            .option{
+
+                @include Sm{
+                    display: none;
+                }
+
+                &:not(:last-child){
+                    & > a{
+                        margin-#{$end-dir}: 30px;
+                    }
+                }
+
+                &.drop{
+                    position: relative;
+
+                    &:hover{
+
+                        & ul{
+                            opacity: 1;
+                            visibility: visible;
+                            transform: translate($transform-dir * 20%,-14px);
+                        }
+                    }
+
+                    ul{
+                        position: absolute;
+                        width: 132px;
+                        height: 74px;
+                        #{$end-dir}: 0;
+                        top: 40px;
+                        transform: translate($transform-dir * 20%, 0px);
+                        z-index: 10;
+                        background-color: #fff;
+                        border-radius: 2px;
+                        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+                        padding: 0 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        margin: 2px 0 0;
+                        font-size: 14px;
+                        text-align: center;
+                        visibility: hidden;
+                        opacity: 0;
+                        transition: .5s;
+
+                        li{
+                            width: 100%;
+
+                            &.bor{
+                                border-bottom: 1px solid #f4f4e1;
+                            }
+
+                            a{
+                                font-size: 14px;
+                                font-family: "crRglr";
+                                color: $prim-color;
+                                line-height: 2.143;
+                                transition: .5s;
+
+                                &:hover{
+                                    color: $sec-color;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+
+                        .shape{
+                            width: 0;
+                            height: 0;
+                            display: block;
+                            border-width: 14px;
+                            border-color: transparent transparent #ffffff;
+                            border-style: solid;
+                            top: -19px;
+                            position: absolute;
+                            right: 50%;
+                            transform: translateX(50%);
+                        }
+                    }
+                }
+
+                &.cart{
+                    // width: 54px;
+
+                    @include Sm{
+                        display: block;
+                    }
+
+                    a{
+                        justify-content: flex-end;
+                        position: relative;
+                        display: initial;
+
+                        span.noti{
+                            position: absolute;
+                            top: -5px;
+                            #{$start-dir}: -12px;
+                            width: 15px;
+                            height: 15px;
+                            background-color: #497e35;
+                            color: #FFF;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            font-size: 11px;
+                            font-family: "crSimiBold";
+                        }
+                    }
+                }
+
+                & > a {
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover{
+                        text-decoration: none;
+
+                        & i{
+                            color: $sec-color
+                        }
+                    }
+                }
+
+
+                span{
+                    font-size: 14px;
+                    font-family: "crSimiBold";
+                    color: $prim-color;
+                    margin-#{$start-dir}: 5px;
+
+                    @include Sm{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Start Banner Carousel
+.car-sec{
+    width: 100%;
+
+    .owl-carousel{
+        width: 100%;
+
+        .item{
+
+            img{
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .owl-dots{
+            margin-top: -25px !important;
+            transform: translateY(-25px);
+            position: relative;
+
+            @include respond(480){
+                transform: translateY(-15px);            
+            }
+
+            button{
+                
+                span{
+                    background-color: $color-white;
+                }
+
+                &.active{
+                    span{
+                        background-color: $sec-color;
+                    }
+                }
+
+                &:hover{
+                    span{
+                        background-color: rgba($sec-color, .6);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// End Banner Carousel
+
+// Strat Products
+.our-products{
+
+    h2{
+        font-size: 20px;
+        font-family: "crBold";
+        color: $prim-color;
+        line-height: 2;
+        margin-bottom: 25px;
+        margin-top: 0;
+    }
+}
+
+.products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 850px;
+    margin: auto;
+
+    .product{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px;
+        border-radius: 15px;
+        border: 1px solid #e6e5e3;
+        margin-bottom: 15px;
+
+        @include Sm{
+            flex-wrap: wrap;
+        }
+
+        @include respond(480){
+            width: 337px;
+        }
+
+        @include respond(320){
+            width: 100%;
+        }
+
+        .details{
+            display: flex;
+
+            @include respond(320){
+                flex-wrap: wrap;
+            }
+
+            .pic{
+                border-radius: 13px;
+                overflow: hidden;
+
+                @include respond(480){
+                    width: 123px;
+                    height: 123px;
+
+                    img{
+                        width: 100%;
+                    }
+                }
+
+                @include respond(320){
+                    width: auto;
+                    height: auto;
+
+                    img{
+                        width: auto;
+                    }
+                }
+
+                @include respond(320){
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+
+            .det{
+                padding-#{$start-dir}: 25px;
+
+                @include respond(480){
+                    padding-#{$start-dir}: 22px;
+                }
+
+                @include respond(320){
+                    padding: 0;
+                    text-align: center;
+                    width: 100%;
+                    margin-top: 25px;
+                }
+
+                p.title{
+                    margin-bottom: 17px;
+                    margin-top: 17px;
+                    display: flex;
+
+                    @include Xs{
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    @include respond(480){
+                        margin-top: 10px;
+                        margin-bottom: 15px;
+                    }
+
+                    @include respond(320){
+                        display: initial;
+                    }
+
+                    span{
+
+                        &:nth-child(1){
+                            font-size: 15px;
+                            font-family: "crSimiBold";
+                            color: $prim-color;
+                            margin-#{$end-dir}: 10px;
+
+                            @include Xs{
+                                margin-top: 10px;
+                                font-size: 13px;
+                            }
+                        }
+
+                        &:nth-child(2){
+                            width: 75px;
+                            height: 23px;
+                            font-size: 12px;
+                            font-family: "crBold";
+                            color: $color-white;
+                            background-color: #9f927e;
+                            padding: 0px 13px;
+                            border-radius: 500px;
+                            display: inline-block;
+                            line-height: 1.8;
+                            text-align: center;
+
+                            @include Xs{
+                                order: -1;
+                                align-self: baseline;
+                                font-size: 12px;
+                                line-height: 1.8;
+                            }
+                        }
+                    }
+                }
+
+                p.prise{
+
+                    @include respond(320){
+                        margin: 15px;
+                    }
+
+                    span{
+
+                        &.pris{
+                            font-size: 16px;
+                            font-family: "crBold";
+                            color: $sec-color;
+
+                            @include Xs{
+                                font-size: 14px;
+                            }
+                        }
+
+                        &.disc{
+                            color: #a5a5a5;
+                            text-decoration: line-through;
+                            font-family: "crSimiBold";
+                            font-size: 15px;
+                            margin-#{$start-dir}: 10px;
+                            display: inline-block;
+
+                            @include Xs{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                form{
+                    margin-top: 17px;
+                    position: relative;
+                    width: max-content;
+
+                    // @include Sm{
+                    //     margin-#{$start-dir}: 43px;
+                    // }
+
+                    @include Xs{
+                        margin-#{$start-dir}: 0;
+                    }
+
+                    @include respond(320){
+                        margin: auto;
+                    }
+
+                    input{
+                        width: 190px;
+                        height: 38px;
+                        padding: 0 20px;
+                        text-align: center;
+                        border: 1px solid #e6e5e3;
+                        border-radius: 100px;
+
+                        &:focus{
+                            outline: none;
+                        }
+
+                        @include Sm{
+                            width: 220px;
+                        }
+
+                        @include Xs{
+                            width: 160px;
+                        }
+
+                        @include respond(480){
+                            width: 167px;
+                        }
+                    }
+
+                    button{
+                        width: 24px;
+                        height: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                        background-color: #d1d1d1;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        z-index: 9;
+                        transition: .5s;
+
+                        &:hover{
+                            background-color: $prim-color;
+                        }
+
+                        &:nth-child(1){
+                            #{$start-dir}: 0;
+                            margin-#{$start-dir}: 8px;
+                        }
+
+                        &:last-child{
+                            #{$end-dir}: 0;
+                            margin-#{$end-dir}: 8px;
+                        }
+
+                        i{
+                            color: $color-white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .action{
+            display: flex;
+            align-items: flex-end;
+
+            @include Sm{
+                justify-content: flex-end;
+                width: 100%;
+            }
+
+            @include respond(320){
+                justify-content: center;
+            }
+
+            .addTo{
+                width: 220px;
+                height: 38px;
+                border: 0;
+                border-radius: 100px;
+                background-color: $sec-color;
+                color: $color-white;
+                margin-bottom: 10px;
+                margin-#{$end-dir}: 20px;
+                transition: .5s;
+
+                &:hover{
+                    background-color: #699d55;
+                }
+
+                @include Sm{
+                    margin-top: 20px;
+                    margin-#{$end-dir}: 15px;
+                }
+
+                @include Xs{
+                    width: 160px;
+                    margin-#{$end-dir}: 0px;
+                }
+
+                @include respond(480){
+                    width: 167px;
+                    margin-#{$end-dir}: 2px;
+                }
+
+                span{
+                    font-size: 14.773px;
+                    font-family: "crBold";
+                    color: $color-white;
+                    margin-#{$start-dir}: 10px;
+                }
+            }
+        }
+    }
+}
+// End Of Our Products
+
+
+// Start Footer
+
+footer{
+    background-color: $prim-color;
+    position: relative;
+
+    .pat{
+        position: absolute;
+        bottom: 0;
+        #{$end-dir}: 0;
+        z-index: 0;
+
+        @include respond(480){
+            display: none;
+        }
+    }
+
+    .fotContent{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .fotNav{
+        margin-bottom: 45px;
+        
+        ul{
+            display: flex;
+
+            @include Sm{
+                flex-direction: column;
+                align-items: center;
+            }
+
+            li{
+
+                &:not(:last-child){
+                    margin-#{$end-dir}: 20px;
+
+                    @include Sm{
+                        margin-bottom: 25px;
+                    }
+
+                    @include Sm{
+                        margin-#{$end-dir}: 0;
+                    }
+                }
+
+                a{
+                    color: #d5c8b4;
+                    font-size: 14px;
+                    font-family: "crRglr";
+                    transition: .5s;
+
+                    &:hover{
+                        color: $color-white;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .social{
+        margin-bottom: 45px;
+
+        a{
+
+            &:not(:last-child){
+                margin-#{$end-dir}: 25px;
+            }
+
+            i{
+                width: 20px !important;
+                height: 20px;
+                font-size: 20px;
+                transition: .5s;
+                color: #d5c8b4;
+    
+                &:hover{
+                    color: $color-white;
+                }
+            }
+        }
+    }
+
+    .payment{
+        margin-bottom: 45px;
+    }
+
+    .copyright{
+
+        p{
+            color: #d5c8b4;
+            font-family: 'crRglr';
+            font-size: 12px;
+            text-align: center;
+            line-height: 2.5;
+
+            @include Sm{
+                display: flex;
+                flex-direction: column;
+            }
+
+            a{
+                color: #d5c8b4;
+                text-decoration: none;
+
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+
+            img{
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+// End Of Footer
